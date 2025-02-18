@@ -2,6 +2,7 @@ import BreadcrumbHeader from '@/components/BreadcrumbHeader'
 import DesktopSidebar from '@/components/Sidebar'
 import { ThemeModeToggle } from '@/components/ThemeModeToggle'
 import { Separator } from '@/components/ui/separator'
+import { SignedIn, UserButton } from '@clerk/nextjs'
 import React from 'react'
 
 function layout({ children }: { children: React.ReactNode }) {
@@ -13,11 +14,14 @@ function layout({ children }: { children: React.ReactNode }) {
           <BreadcrumbHeader />
           <div className='gap-1 flex items-center'>
             <ThemeModeToggle />
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </header>
         <Separator />
         <div className='overflow-auto'>
-          <div className='flex-1 container py-4 text-accent-foreground'>
+          <div className='flex-1 container p-4 text-accent-foreground'>
             {children}
           </div>
         </div>
