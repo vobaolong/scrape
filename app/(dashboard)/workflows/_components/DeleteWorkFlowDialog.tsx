@@ -1,6 +1,6 @@
 'use client'
 
-import { DeleteWorkFlow } from '@/actions/workflows/deleteWorkFlows'
+import { DeleteWorkFlow } from '@/actions/workflows/deleteWorkFlow'
 import {
   AlertDialog,
   AlertDialogAction,
