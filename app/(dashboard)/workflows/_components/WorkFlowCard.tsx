@@ -33,9 +33,9 @@ const statusColors = {
 function WorkFlowCard({ workflow }: { workflow: WorkFlow }) {
   const isDraft = workflow.status === WorkFlowStatus.DRAFT
   return (
-    <Card className='shadow-sm rounded-lg overflow-hidden hover:shadow-md dark:shadow-primary/30 border border-separate'>
+    <Card className='overflow-hidden border border-separate rounded-lg shadow-sm hover:shadow-md dark:shadow-primary/30'>
       <CardContent className='p-4 h-[100px] flex items-center justify-between'>
-        <div className='flex items-center space-x-3 justify-end'>
+        <div className='flex items-center justify-end space-x-3'>
           <div
             className={cn(
               'w-10 h-10 rounded-full flex items-center justify-center',
@@ -43,16 +43,16 @@ function WorkFlowCard({ workflow }: { workflow: WorkFlow }) {
             )}
           >
             {isDraft ? (
-              <FileTextIcon className='h-5 w-5' />
+              <FileTextIcon className='w-5 h-5' />
             ) : (
-              <PlayIcon className='h-5 w-5 text-white' />
+              <PlayIcon className='w-5 h-5 text-white' />
             )}
           </div>
           <div>
             <h3 className='flex items-center text-base font-bold text-muted-foreground'>
               <Link
                 href={`/workflow/editor/${workflow.id}`}
-                className='hover:underline flex items-center'
+                className='flex items-center hover:underline'
               >
                 {workflow.name}
               </Link>

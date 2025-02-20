@@ -3,7 +3,7 @@ import React from 'react'
 
 function loading() {
   return (
-    <div className='flex items-center justify-center h-screen w-full'>
+    <div className='flex items-center justify-center w-full h-screen'>
       <Loader2Icon size={30} className='animate-spin stroke-primary' />
     </div>
   )

@@ -12,7 +12,7 @@ function layout({ children }: { children: React.ReactNode }) {
       <div className='flex flex-col flex-1 min-h-screen'>
         <header className='flex items-center justify-between px-6 py-4 h-[50px] container'>
           <BreadcrumbHeader />
-          <div className='gap-1 flex items-center'>
+          <div className='flex items-center gap-1'>
             <ThemeModeToggle />
             <SignedIn>
               <UserButton />
@@ -21,7 +21,7 @@ function layout({ children }: { children: React.ReactNode }) {
         </header>
         <Separator />
         <div className='overflow-auto'>
-          <div className='flex-1 container p-4 text-accent-foreground'>
+          <div className='container flex-1 p-4 text-accent-foreground'>
             {children}
           </div>
         </div>

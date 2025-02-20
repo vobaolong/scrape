@@ -71,7 +71,7 @@ function CreateWorkFlowDialog({ triggerText }: { triggerText?: string }) {
         <div className='p-6'>
           <Form {...form}>
             <form
-              className='space-y-8 w-full'
+              className='w-full space-y-8'
               onSubmit={form.handleSubmit(onSubmit)}
             >
               <FormField
@@ -79,7 +79,7 @@ function CreateWorkFlowDialog({ triggerText }: { triggerText?: string }) {
                 name='name'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='flex gap-1 items-center'>
+                    <FormLabel className='flex items-center gap-1'>
                       Name
                       <p className='text-xs text-primary'>(required)</p>
                     </FormLabel>
@@ -98,7 +98,7 @@ function CreateWorkFlowDialog({ triggerText }: { triggerText?: string }) {
                 name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='flex gap-1 items-center'>
+                    <FormLabel className='flex items-center gap-1'>
                       Description
                       <p className='text-xs text-muted-foreground'>
                         (optional)

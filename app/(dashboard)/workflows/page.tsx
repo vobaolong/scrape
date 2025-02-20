@@ -30,7 +30,7 @@ function UserWorkFlowsSkeleton() {
   return (
     <div className='space-y-2'>
       {[1, 2, 3, 4].map((i) => (
-        <Skeleton key={i} className='h-32 w-full' />
+        <Skeleton key={i} className='w-full h-32' />
       ))}
     </div>
   )
@@ -52,8 +52,8 @@ async function UserWorkFlows() {
   }
   if (workflows.length === 0) {
     return (
-      <div className='flex flex-col gap-4 h-full items-center justify-center'>
-        <div className='rounded-full bg-accent w-20 h-20 flex items-center justify-center'>
+      <div className='flex flex-col items-center justify-center h-full gap-4'>
+        <div className='flex items-center justify-center w-20 h-20 rounded-full bg-accent'>
           <InboxIcon size={40} className='stroke-primary' />
         </div>
         <div className='flex flex-col gap-1 text-center'>

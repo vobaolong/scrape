@@ -49,7 +49,7 @@ function DesktopSidebar() {
         <Logo />
       </div>
       <div className='p-2'>TODO Credits</div>
-      <div className='flex flex-col p-2 gap-1'>
+      <div className='flex flex-col gap-1 p-2'>
         {routes.map((route) => (
           <Link
             key={route.href}
@@ -80,7 +80,7 @@ export function MobileSidebar() {
 
   return (
     <div className='block border-separate bg-background md:hidden'>
-      <nav className='flex items-center justify-center container px-8'>
+      <nav className='container flex items-center justify-center px-8'>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <Button variant={'ghost'} size={'icon'}>

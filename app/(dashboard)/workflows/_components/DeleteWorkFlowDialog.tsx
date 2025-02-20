@@ -51,7 +51,7 @@ function DeleteWorkFlowDialog({
           <AlertDialogDescription>
             If you delete this workflow, it will be permanently removed from
             your account.
-            <div className='flex flex-col py-4 gap-2'>
+            <div className='flex flex-col gap-2 py-4'>
               <p>
                 If you sure, enter <b>{workflowName}</b> to confirm:
               </p>

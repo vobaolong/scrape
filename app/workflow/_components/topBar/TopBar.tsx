@@ -14,7 +14,7 @@ function TopBar({ title, subtitle, workflowId }: Props) {
   const router = useRouter()
   return (
     <header className='flex p-2 border-p-2 border-separate justify-between w-full h-[60px] sticky top-0 bg-background z-10	'>
-      <div className='flex gap-1 flex-1'>
+      <div className='flex flex-1 gap-1'>
         <TooltipWrapper content='Back'>
           <Button variant={'ghost'} size={'icon'} onClick={() => router.back()}>
             <ChevronLeftIcon size={20} />
@@ -23,12 +23,12 @@ function TopBar({ title, subtitle, workflowId }: Props) {
         <div>
           <p className='font-bold truncate'>{title}</p>
           {subtitle && (
-            <p className='text-xs text-muted-foreground truncate'>{subtitle}</p>
+            <p className='text-xs truncate text-muted-foreground'>{subtitle}</p>
           )}
         </div>
       </div>
 
-      <div className='flex gap-1 flex-1 justify-end'>
+      <div className='flex justify-end flex-1 gap-1'>
         <SaveBtn workflowId={workflowId} />
       </div>
     </header>
