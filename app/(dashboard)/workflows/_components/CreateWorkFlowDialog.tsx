@@ -39,14 +39,16 @@ function CreateWorkFlowDialog({ triggerText }: { triggerText?: string }) {
       toast.success('Workflow has been created', { id: 'create-workflow' })
     },
     onError: () => {
-      toast.error('Failed to create workflow', { id: 'create-workflow' })
+      toast.error('Failed to create workflow', {
+        id: 'create-workflow'
+      })
     }
   })
 
   const onSubmit = useCallback(
     (values: createWorkFlowSchemaType) => {
-      toast.loading('Creating workflow...', { id: 'create-workflow' })
       mutate(values)
+      toast.loading('Creating workflow...', { id: 'create-workflow' })
     },
     [mutate]
   )
