@@ -31,7 +31,7 @@ const nodeTypes = {
 
 const edgeTypes = { default: DeleteAbleEdge }
 
-const snapGrid: [number, number] = [50, 50]
+const snapGrid: [number, number] = [20, 20] // Giảm giá trị để movement mịn hơn
 
 const fitViewOptions = { padding: 1 }
 
@@ -154,7 +154,7 @@ function FlowEditor({ workflow }: { workflow: WorkFlow }) {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
-        snapToGrid
+        snapToGrid={false}
         snapGrid={snapGrid}
         fitView
         fitViewOptions={fitViewOptions}
@@ -164,7 +164,7 @@ function FlowEditor({ workflow }: { workflow: WorkFlow }) {
         isValidConnection={isValidConnection}
       >
         <Controls position='top-left' fitViewOptions={fitViewOptions} />
-        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+        <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
       </ReactFlow>
     </main>
   )

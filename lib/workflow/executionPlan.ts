@@ -1,4 +1,4 @@
-import { AppNode } from '@/types/appNode'
+import { AppNode, AppNodeMissingInputs } from '@/types/appNode'
 import {
   WorkFlowExecutionPlan,
   WorkFlowExecutionPlanPhase
@@ -6,8 +6,17 @@ import {
 import { Edge, getIncomers } from '@xyflow/react'
 import { TaskRegistry } from './task/registry'
 
+export enum FlowToExecutionPlanValidationError {
+  'NO_ENTRY_POINT',
+  'INVALID_INPUTS'
+}
+
 type FlowToExecutionPlan = {
   executionPlan?: WorkFlowExecutionPlan
+  error?: {
+    type: FlowToExecutionPlanValidationError
+    invalidElements?: AppNodeMissingInputs[]
+  }
 }
 
 export function FlowToExecutionPlan(
@@ -19,15 +28,28 @@ export function FlowToExecutionPlan(
   )
 
   if (!entryPoint) {
-    throw new Error('TODO: HANDLE THIS ERROR')
+    return {
+      error: { type: FlowToExecutionPlanValidationError.NO_ENTRY_POINT }
+    }
   }
 
+  const inputsWithErrors: AppNodeMissingInputs[] = []
   const planned = new Set<string>()
+  const invalidInputs = getInvalidInputs(entryPoint, edges, planned)
+  if (invalidInputs.length > 0) {
+    inputsWithErrors.push({
+      nodeId: entryPoint.id,
+      inputs: invalidInputs
+    })
+  }
+
   const executionPlan: WorkFlowExecutionPlan = [
     { phase: 1, nodes: [entryPoint] }
   ]
 
-  for (let phase = 2; phase <= planned.size || phase <= nodes.length; phase++) {
+  planned.add(entryPoint.id)
+
+  for (let phase = 2; phase <= planned.size && phase <= nodes.length; phase++) {
     const nextPhase: WorkFlowExecutionPlanPhase = { phase, nodes: [] }
     for (const currentNode of nodes) {
       if (planned.has(currentNode.id)) {
@@ -36,16 +58,33 @@ export function FlowToExecutionPlan(
       const invalidInputs = getInvalidInputs(currentNode, edges, planned)
       if (invalidInputs.length > 0) {
         const incomers = getIncomers(currentNode, nodes, edges)
+
         if (incomers.every((incomer) => planned.has(incomer.id))) {
-          console.log('invalid')
-          throw new Error('TODO')
+          console.error('invalid input:', currentNode.id, invalidInputs)
+          inputsWithErrors.push({
+            nodeId: currentNode.id,
+            inputs: invalidInputs
+          })
         } else {
           continue
         }
       }
 
       nextPhase.nodes.push(currentNode)
-      planned.add(currentNode.id)
+    }
+    for (const node of nextPhase.nodes) {
+      planned.add(node.id)
+    }
+
+    executionPlan.push(nextPhase)
+  }
+
+  if (inputsWithErrors.length > 0) {
+    return {
+      error: {
+        type: FlowToExecutionPlanValidationError.INVALID_INPUTS,
+        invalidElements: inputsWithErrors
+      }
     }
   }
   return { executionPlan }
@@ -92,4 +131,16 @@ function getInvalidInputs(node: AppNode, edges: Edge[], planned: Set<string>) {
     invalidInputs.push(input.name)
   }
   return invalidInputs
+}
+
+function getIncomers(node: AppNode, nodes: AppNode[], edges: Edge[]) {
+  if (!node.id) return []
+  const incomersIds = new Set()
+  edges.forEach((edge) => {
+    if (edge.target === node.id) {
+      incomersIds.add(edge.source)
+    }
+  })
+
+  return nodes.filter((node) => incomersIds.has(node.id))
 }

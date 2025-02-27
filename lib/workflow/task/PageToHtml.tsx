@@ -4,7 +4,7 @@ import { CodeIcon, LucideProps } from 'lucide-react'
 
 export const PageToHtmlTask = {
   type: TaskType.PAGE_TO_HTML,
-  label: 'Get page to HTML',
+  label: 'Get HTML form page',
   icon: (props: LucideProps) => (
     <CodeIcon className='stroke-pink-400' {...props} />
   ),
